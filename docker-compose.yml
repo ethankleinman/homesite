@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:1.21
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+     - ./nginx/conf.d/:/etc/nginx/conf.d/
+     - ./nginx/html:/usr/share/nginx/html
+    restart: always
+  #environment:
+  #  - NGINX_HOST=ekleinman.com
+  db:
+    image: postgres:14
+    volumes:
+     - ./pgdata:/var/lib/postgresql/data
+    restart: always
+    environment:
+     - POSTGRES_PASSWORD
+  gin:
+    build: .
+    restart: always
