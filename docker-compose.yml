@@ -8,13 +8,12 @@ services:
     volumes:
      - ./nginx/conf.d/:/etc/nginx/conf.d/
      - ./nginx/html:/usr/share/nginx/html
+     - ./nginx/letsencrypt:/etc/letsencrypt
     restart: always
-  #environment:
-  #  - NGINX_HOST=ekleinman.com
   db:
     image: postgres:14
     volumes:
-     - ./pgdata:/var/lib/postgresql/data
+     - ../pgdata:/var/lib/postgresql/data
     restart: always
     environment:
      - POSTGRES_PASSWORD
